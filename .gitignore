@@ -1,0 +1,49 @@
+
+projet_webmapping_antananarivo_v2.pdf
+*.pdf
+
+*.shp
+*.geojson
+
+frontend/images/
+
+backend/src/main/resources/application.properties
+
+
+# Exécutables et wrappers Maven
+**/mvnw
+**/mvnw.cmd
+**/.mvn/
+HELP.md
+
+# Répertoires de compilation (Build)
+**/target/
+**/build/
+**/*.class
+
+
+
+# IntelliJ IDEA
+**/.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+**/.vscode/
+
+# Eclipse / Spring Tool Suite (STS)
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings/
+**/.springBeans
+**/.sts4-cache
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/

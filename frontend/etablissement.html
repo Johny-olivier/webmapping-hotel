@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche établissement — Tana Explorer</title>
+<meta name="description" content="Découvrez les détails de cet établissement à Antananarivo : photos, notes, prix et localisation.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<!-- Google Fonts — Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/etablissement.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-tana navbar-expand-lg" id="mainNav">
+  <div class="container-fluid px-lg-4">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i data-lucide="map-pin"></i></span>
+      <span>Tana Explorer</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menu">
+      <i data-lucide="menu" class="toggler-icon"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="carte.html">Carte</a></li>
+      </ul>
+      <form class="d-flex navbar-search-form" role="search" id="navSearchForm">
+        <div class="search-wrapper">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" class="search-name-input" placeholder="Rechercher par nom...">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== FIL D'ARIANE ===== -->
+<div class="container breadcrumb-bar">
+  <a href="carte.html">
+    <i data-lucide="arrow-left"></i>
+    Retour à la carte
+  </a>
+</div>
+
+<!-- ===== CONTENU GENERE DYNAMIQUEMENT PAR JS ===== -->
+<div id="etabContent" class="container etab-container">
+  <!-- Message affiche tant que les donnees ne sont pas chargees -->
+  <div class="text-center py-5" id="etabLoading">
+    <i data-lucide="loader-2"></i>
+    <p>Chargement de la fiche...</p>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer-tana">
+  <div class="container">
+    <div class="footer-content">
+      <span class="footer-brand">Tana Explorer</span>
+      <span class="footer-sep">·</span>
+      <span>Projet SIG — Antananarivo, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Leaflet -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<!-- JS commun -->
+<script src="js/navbar.js"></script>
+<!-- JS specifique a la fiche etablissement -->
+<script src="js/etablissement.js"></script>
+<!-- Initialize Lucide Icons -->
+<script>lucide.createIcons();</script>
+
+</body>
+</html>

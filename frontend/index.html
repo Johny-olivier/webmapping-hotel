@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tana Explorer — Hôtels & Restaurants d'Antananarivo</title>
+<meta name="description" content="Explorez les meilleurs hôtels et restaurants d'Antananarivo sur une carte interactive. Filtrez par budget, catégorie et note.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts — Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Lucide Icons (CDN) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/accueil.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-tana navbar-home navbar-expand-lg" id="mainNav">
+  <div class="container-fluid px-lg-4">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i data-lucide="map-pin"></i></span>
+      <span>Tana Explorer</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menu">
+      <i data-lucide="menu" class="toggler-icon"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="carte.html">Carte</a></li>
+      </ul>
+      <form class="d-flex navbar-search-form" role="search" id="navSearchForm">
+        <div class="search-wrapper">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" class="search-name-input" placeholder="Rechercher un hôtel ou restaurant...">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<header class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-center">
+    <h1 class="hero-title">Trouvez le meilleur<br>endroit où séjourner</h1>
+    <p class="hero-subtitle mx-auto">
+      Explorez les hôtels et restaurants d'Antananarivo sur une carte interactive.
+      Filtrez par budget, catégorie ou note — et trouvez ce qui se trouve près de vous.
+    </p>
+    <form class="hero-search-form mx-auto" id="heroSearchForm">
+      <div class="hero-search-wrapper">
+        <i data-lucide="search" class="hero-search-icon"></i>
+        <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="Quel lieu recherchez-vous ?">
+        <button type="submit" class="hero-search-btn">Rechercher</button>
+      </div>
+    </form>
+  </div>
+</header>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories-section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2>Que recherchez-vous ?</h2>
+      <p>Deux univers, une seule carte.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <a href="carte.html?categorie=hotel" class="category-card" id="card-hotels">
+          <div class="category-icon">
+            <i data-lucide="bed-double"></i>
+          </div>
+          <h3>Hôtels</h3>
+          <p>Des chambres pour tous les budgets, du logement simple à l'hôtel de standing, partout dans la capitale.</p>
+          <span class="category-link">
+            Voir les hôtels <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+          </span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="carte.html?categorie=restaurant" class="category-card" id="card-restaurants">
+          <div class="category-icon">
+            <i data-lucide="utensils-crossed"></i>
+          </div>
+          <h3>Restaurants</h3>
+          <p>Cuisine malgache, gastronomie française, fast-food ou petites gargotes : trouvez votre prochain repas.</p>
+          <span class="category-link">
+            Voir les restaurants <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMENT CA MARCHE ===== -->
+<section class="how-it-works" id="howItWorks">
+  <div class="container">
+    <div class="section-header">
+      <h2>Comment ça fonctionne</h2>
+      <p>Trois étapes pour trouver votre prochaine adresse.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon">
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
+          <h3>Filtrez</h3>
+          <p>Définissez votre budget, votre catégorie préférée et la note minimale souhaitée.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-icon">
+            <i data-lucide="crosshair"></i>
+          </div>
+          <h3>Localisez-vous</h3>
+          <p>Activez « Près de moi » pour voir les établissements triés par distance.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon">
+            <i data-lucide="route"></i>
+          </div>
+          <h3>Allez-y</h3>
+          <p>Consultez la fiche détaillée et calculez l'itinéraire vers l'établissement choisi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APERCU CARTE ===== -->
+<section class="map-preview" id="mapPreview">
+  <div class="container">
+    <div class="map-preview-card">
+      <div class="map-preview-text">
+        <h2>Une carte, toute la ville</h2>
+        <p>
+          Visualisez en un coup d'œil tous les hôtels et restaurants référencés
+          à Antananarivo, avec leurs prix, notes et photos.
+          Calculez votre itinéraire directement depuis chaque fiche.
+        </p>
+        <a href="carte.html" class="btn-tana-primary">
+          <i data-lucide="map" style="width:18px;height:18px"></i>Ouvrir la carte
+        </a>
+      </div>
+      <div class="map-preview-visual">
+        <i data-lucide="map-pin" class="floating-pin"></i>
+        <i data-lucide="map-pin" class="floating-pin pin-2"></i>
+        <i data-lucide="map-pin" class="floating-pin pin-3"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer-tana">
+  <div class="container">
+    <div class="footer-content">
+      <span class="footer-brand">Tana Explorer</span>
+      <span class="footer-sep">·</span>
+      <span>Projet SIG — Antananarivo, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<!-- JS commun -->
+<script src="js/navbar.js"></script>
+<!-- Initialize Lucide Icons -->
+<script>lucide.createIcons();</script>
+
+</body>
+</html>

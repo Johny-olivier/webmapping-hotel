@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte — Tana Explorer</title>
+<meta name="description" content="Explorez les hôtels et restaurants d'Antananarivo sur notre carte interactive.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<!-- Google Fonts — Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/carte.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-tana navbar-expand-lg" id="mainNav">
+  <div class="container-fluid px-lg-4">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i data-lucide="map-pin"></i></span>
+      <span>Tana Explorer</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menu">
+      <i data-lucide="menu" class="toggler-icon"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="carte.html">Carte</a></li>
+      </ul>
+      <form class="d-flex navbar-search-form" role="search" id="navSearchForm">
+        <div class="search-wrapper">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" class="search-name-input" id="navSearchInput" placeholder="Rechercher par nom...">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== CORPS DE L'APPLICATION ===== -->
+<div class="app-body">
+
+  <!-- ===== SIDEBAR : FORMULAIRE DE RECHERCHE AVANCEE ===== -->
+  <aside class="sidebar-filters">
+    <div class="filter-title">
+      <i data-lucide="sliders-horizontal"></i>Recherche avancée
+    </div>
+
+    <!-- Budget -->
+    <div class="filter-block">
+      <label class="filter-label">Fourchette de prix</label>
+      <div class="budget-inputs">
+        <input type="number" id="prixMin" placeholder="Min" min="0" step="1000">
+        <span class="budget-separator">—</span>
+        <input type="number" id="prixMax" placeholder="Max" min="0" step="1000">
+      </div>
+      <div class="budget-unit">Montant en Ariary (Ar)</div>
+    </div>
+
+    <!-- Pres de moi -->
+    <div class="filter-block" id="near-me">
+      <label class="filter-label">Localisation</label>
+      <button class="btn-near-me" id="btnNearMe">
+        <i data-lucide="navigation"></i>
+        Près de moi
+      </button>
+      <div class="near-me-status" id="nearMeStatus">
+        <i data-lucide="check-circle-2"></i> Position détectée
+      </div>
+
+      <div class="mt-4">
+        <div class="radius-display">
+          <label class="filter-label mb-0">Rayon de recherche</label>
+          <span class="radius-value" id="radiusValue">1 km</span>
+        </div>
+        <input type="range" class="form-range" id="radiusRange" min="10" max="50000" step="10" value="1000">
+      </div>
+    </div>
+
+    <!-- Categorie -->
+    <div class="filter-block">
+      <label class="filter-label">Catégorie</label>
+      <div class="category-chips">
+        <span class="chip active" data-category="all">
+          <i data-lucide="layout-grid"></i>Tous
+        </span>
+        <span class="chip" data-category="hotel">
+          <i data-lucide="bed-double"></i>Hôtels
+        </span>
+        <span class="chip" data-category="restaurant">
+          <i data-lucide="utensils-crossed"></i>Restaurants
+        </span>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="filter-block">
+      <label class="filter-label">Note minimum</label>
+      <div class="rating-filter" id="ratingFilter">
+        <svg class="star" data-value="1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <svg class="star" data-value="2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <svg class="star" data-value="3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <svg class="star" data-value="4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <svg class="star" data-value="5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <span class="rating-label" id="ratingLabel">Toutes les notes</span>
+      </div>
+    </div>
+
+    <button class="btn-apply-filters" id="btnApplyFilters">
+      <i data-lucide="search" style="width:18px;height:18px"></i>Appliquer
+    </button>
+  </aside>
+
+  <!-- ===== ZONE PRINCIPALE : RESULTATS + CARTE ===== -->
+  <div class="main-content">
+
+    <!-- Liste des resultats -->
+    <section class="results-panel">
+      <div class="results-header">
+        <span class="results-count" id="resultsCount">Chargement...</span>
+        <div class="custom-select-wrapper" id="customSortSelect">
+          <div class="custom-select-trigger">
+            <span class="custom-select-label">Trier par distance</span>
+            <i data-lucide="chevron-down" style="width: 1.1rem; height: 1.1rem;"></i>
+          </div>
+          <div class="custom-select-options">
+            <div class="custom-option selected" data-value="distance">Trier par distance</div>
+            <div class="custom-option" data-value="price_asc">Prix croissant</div>
+            <div class="custom-option" data-value="price_desc">Prix décroissant</div>
+            <div class="custom-option" data-value="rating">Meilleure note</div>
+          </div>
+        </div>
+        <input type="hidden" id="sortSelect" value="distance">
+      </div>
+
+      <div id="resultsList"><!-- Les cartes sont generees par JS --></div>
+    </section>
+
+    <!-- Carte -->
+    <section class="map-panel">
+      <div id="map"></div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Leaflet -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<!-- JS commun -->
+<script src="js/navbar.js"></script>
+<!-- JS specifique a la carte -->
+<script src="js/carte.js"></script>
+<!-- Initialize Lucide Icons -->
+<script>lucide.createIcons();</script>
+
+</body>
+</html>
